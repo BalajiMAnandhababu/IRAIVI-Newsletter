@@ -1,0 +1,492 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>வாடிக்கையாளர் KYC மறு-சரிபார்ப்பு | Customer KYC Re-verification</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;600;700&display=swap');
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: #f4f4f4;
+    font-family: 'Noto Sans Tamil', 'Segoe UI', sans-serif;
+    color: #1a1a1a;
+}
+
+.locked-badge {
+    display: inline-block;
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffc107;
+    border-radius: 4px;
+    padding: 3px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+.field-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.field-row:last-child {
+    border-bottom: none;
+}
+
+.field-name {
+    flex: 0 0 200px;
+    font-weight: 600;
+    color: #555;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+}
+
+.field-value {
+    flex: 1;
+    color: #333;
+}
+
+.field-lock {
+    flex: 0 0 80px;
+    text-align: right;
+}
+
+.step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: #a30000;
+    color: #fff;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 14px;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.step-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 18px;
+    padding: 12px 15px;
+    background: #fafafa;
+    border-radius: 6px;
+    border-left: 3px solid #a30000;
+}
+
+.step-content h4 {
+    margin: 0 0 4px 0;
+    font-size: 15px;
+    color: #1a1a2e;
+}
+
+.step-content p {
+    margin: 0;
+    font-size: 13px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.audit-row {
+    display: flex;
+    padding: 8px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 13px;
+    align-items: center;
+}
+
+.audit-row:nth-child(even) {
+    background: #fafafa;
+}
+
+.audit-label {
+    flex: 0 0 180px;
+    font-weight: 600;
+    color: #666;
+}
+
+.audit-value {
+    flex: 1;
+    color: #333;
+}
+
+.btn-reverify {
+    display: inline-block;
+    background: #a30000;
+    color: #fff;
+    padding: 14px 36px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: 'Noto Sans Tamil', sans-serif;
+    transition: background 0.2s;
+}
+
+.btn-reverify:hover {
+    background: #8a0000;
+}
+
+.info-box {
+    background: #e8f4fd;
+    border: 1px solid #b8daff;
+    border-radius: 6px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: #004085;
+    line-height: 1.6;
+    margin: 15px 0;
+}
+
+.warning-box {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 6px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: #856404;
+    line-height: 1.6;
+    margin: 15px 0;
+}
+
+.policy-list {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.policy-list li {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.8;
+}
+
+.section-divider {
+    height: 3px;
+    background: linear-gradient(to right, #a30000, #d4af37, #a30000);
+    margin: 0;
+}
+</style>
+</head>
+
+<body>
+
+<table width="100%" cellpadding="0" cellspacing="0">
+<tr><td align="center">
+
+<table width="900" style="background:#ffffff;">
+
+<!-- HEADER -->
+<tr>
+<td style="background:#1a1a2e;padding:20px;">
+<table width="100%">
+<tr>
+
+<td width="80">
+<img src="https://balajimanandhababu.github.io/IRAIVI-Newsletter/iraivi_logo.png" style="width:60px;height:60px;border-radius:50%;">
+</td>
+
+<td>
+<div style="font-size:28px;color:#fff;font-weight:bold;">
+வாடிக்கையாளர் KYC மறு-சரிபார்ப்பு
+</div>
+<div style="font-size:12px;color:#ffd700;">
+Customer KYC Re-verification | இறைவி
+</div>
+</td>
+
+<td align="right" style="color:#fff;font-size:12px;">
+ஞாயிறு, 31 ஆகஸ்ட், 2026
+</td>
+
+</tr>
+</table>
+</td>
+</tr>
+
+<!-- STATUS BANNER -->
+<tr>
+<td style="background:#fff3cd;padding:15px 30px;border-bottom:2px solid #ffc107;">
+<table width="100%">
+<tr>
+<td width="40" style="font-size:24px;">🔒</td>
+<td>
+<div style="font-size:16px;font-weight:bold;color:#856404;">
+வாடிக்கையாளர் விவரங்கள் பூட்டப்பட்டுள்ளன — சமர்ப்பிக்கப்பட்ட ஆர்டர் உள்ளது
+</div>
+<div style="font-size:13px;color:#856404;margin-top:4px;">
+Customer details are locked — submitted order exists. Fields attempted to change: <code style="background:#f8d7da;padding:2px 6px;border-radius:3px;font-size:12px;">kyc_completed_at</code>, <code style="background:#f8d7da;padding:2px 6px;border-radius:3px;font-size:12px;">kyc_session_id</code>, <code style="background:#f8d7da;padding:2px 6px;border-radius:3px;font-size:12px;">photo_path</code>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+
+<!-- LOCKED FIELDS DETAIL -->
+<tr>
+<td style="padding:25px 30px;">
+<div style="font-size:18px;font-weight:bold;border-left:5px solid #a30000;padding-left:10px;margin-bottom:15px;">
+🔐 பூட்டப்பட்ட புலங்கள் / Locked Fields
+</div>
+
+<div style="border:1px solid #ddd;border-radius:6px;overflow:hidden;">
+<div class="field-row" style="background:#f5f5f5;font-weight:bold;">
+<div class="field-name">Field</div>
+<div class="field-value">Description / விளக்கம்</div>
+<div class="field-lock">Status</div>
+</div>
+
+<div class="field-row">
+<div class="field-name">kyc_completed_at</div>
+<div class="field-value">KYC சரிபார்ப்பு நிறைவடைந்த நேரம் — KYC completion timestamp</div>
+<div class="field-lock"><span class="locked-badge">🔒 Locked</span></div>
+</div>
+
+<div class="field-row">
+<div class="field-name">kyc_session_id</div>
+<div class="field-value">KYC அமர்வு அடையாளம் — Identity verification session reference</div>
+<div class="field-lock"><span class="locked-badge">🔒 Locked</span></div>
+</div>
+
+<div class="field-row">
+<div class="field-name">photo_path</div>
+<div class="field-value">வாடிக்கையாளர் புகைப்படம் — Customer identity photo path</div>
+<div class="field-lock"><span class="locked-badge">🔒 Locked</span></div>
+</div>
+</div>
+
+<div class="warning-box">
+⚠️ <strong>ஏன் பூட்டப்பட்டுள்ளது?</strong> இந்த வாடிக்கையாளருக்கு சமர்ப்பிக்கப்பட்ட ஆர்டர் உள்ளது. ஆர்டர் செயலில் இருக்கும் போது, KYC தரவை நேரடியாக மாற்ற இயலாது — இது தணிக்கை ஒருமைப்பாட்டை உறுதி செய்கிறது.<br><br>
+<strong>Why locked?</strong> This customer has a submitted order. While an order is active, KYC data cannot be directly modified — this ensures audit integrity and prevents identity tampering on in-flight transactions.
+</div>
+
+</td>
+</tr>
+
+<tr><td><div class="section-divider"></div></td></tr>
+
+<!-- RE-VERIFICATION PROCESS -->
+<tr>
+<td style="padding:25px 30px;">
+<div style="font-size:18px;font-weight:bold;border-left:5px solid #d4af37;padding-left:10px;margin-bottom:15px;">
+🔄 மறு-சரிபார்ப்பு செயல்முறை / Re-verification Process
+</div>
+
+<div class="info-box">
+ℹ️ அடையாளத்தைப் புதுப்பிக்க, புதிய KYC செயல்முறையை முடிக்கவும். இது தணிக்கை செய்யப்பட்ட மறு-சரிபார்ப்பாக பூட்டப்பட்ட தரவை மாற்றும்.<br>
+<strong>To refresh their identity, complete a new KYC session. It will replace locked data as an audited re-verification.</strong>
+</div>
+
+<div style="margin-top:20px;">
+<div class="step-item">
+<span class="step-number">1</span>
+<div class="step-content">
+<h4>புதிய KYC அமர்வைத் தொடங்கவும் / Initiate New KYC Session</h4>
+<p>புதிய அடையாள சரிபார்ப்பு அமர்வை உருவாக்கவும். கணினி புதிய <code>kyc_session_id</code> ஐ ஒதுக்கும் மற்றும் முந்தைய அமர்வை <em>superseded</em> எனக் குறிக்கும்.<br>
+A new identity verification session is created. The system assigns a fresh <code>kyc_session_id</code> and marks the previous session as <em>superseded</em>.</p>
+</div>
+</div>
+
+<div class="step-item">
+<span class="step-number">2</span>
+<div class="step-content">
+<h4>அடையாள ஆவணத்தை சரிபார்க்கவும் / Verify Identity Document</h4>
+<p>வாடிக்கையாளரின் அரசு வழங்கிய அடையாளச் சான்றிதழை (Aadhaar, PAN, Passport) சரிபார்க்கவும். ஆவணங்கள் மூல KYC-யில் பயன்படுத்தியதைப் போலவே அல்லது புதுப்பிக்கப்பட்டதாக இருக்கலாம்.<br>
+Verify the customer's government-issued identity document. Documents may be the same as the original KYC or updated versions.</p>
+</div>
+</div>
+
+<div class="step-item">
+<span class="step-number">3</span>
+<div class="step-content">
+<h4>புகைப்படத்தை மீண்டும் படம் எடுக்கவும் / Recapture Photo</h4>
+<p>புதிய நேரடி புகைப்படத்தை எடுக்கவும். இது <code>photo_path</code> ஐ புதுப்பிக்கும் — பழைய புகைப்படம் காப்பகத்தில் தணிக்கைக்காக பாதுகாக்கப்படும்.<br>
+Capture a fresh live photo. This updates the <code>photo_path</code> — the previous photo is archived for audit purposes, not deleted.</p>
+</div>
+</div>
+
+<div class="step-item">
+<span class="step-number">4</span>
+<div class="step-content">
+<h4>சரிபார்ப்பை முடிக்கவும் / Complete Verification</h4>
+<p>புதிய KYC நிறைவடையும் போது <code>kyc_completed_at</code> புதிய நேரமுத்திரையுடன் புதுப்பிக்கப்படும். மூன்று புலங்களும் ஒரே அணு செயல்பாட்டில் மாற்றப்படும்.<br>
+On completion, <code>kyc_completed_at</code> is updated with a new timestamp. All three fields are replaced in a single atomic operation.</p>
+</div>
+</div>
+
+<div class="step-item">
+<span class="step-number">5</span>
+<div class="step-content">
+<h4>தணிக்கை பதிவு / Audit Record</h4>
+<p>முந்தைய மற்றும் புதிய KYC தரவு இரண்டும் தணிக்கை பதிவில் வரிசைப்படுத்தப்படும் — யார், எப்போது, ​​ஏன் மறு-சரிபார்ப்பு தொடங்கப்பட்டது என்பது உட்பட.<br>
+Both previous and new KYC data are recorded in the audit log — including who initiated the re-verification, when, and why.</p>
+</div>
+</div>
+</div>
+
+</td>
+</tr>
+
+<tr><td><div class="section-divider"></div></td></tr>
+
+<!-- AUDIT TRAIL TEMPLATE -->
+<tr>
+<td style="padding:25px 30px;">
+<div style="font-size:18px;font-weight:bold;border-left:5px solid #a30000;padding-left:10px;margin-bottom:15px;">
+📋 தணிக்கை பதிவு வார்ப்புரு / Audit Trail Template
+</div>
+
+<div style="border:1px solid #ddd;border-radius:6px;overflow:hidden;">
+<div class="audit-row" style="background:#1a1a2e;color:#fff;font-weight:bold;">
+<div class="audit-label" style="color:#ffd700;">Field</div>
+<div class="audit-value" style="color:#ffd700;">Value</div>
+</div>
+
+<div class="audit-row">
+<div class="audit-label">Action</div>
+<div class="audit-value"><strong>KYC_REVERIFICATION</strong></div>
+</div>
+
+<div class="audit-row">
+<div class="audit-label">Reason</div>
+<div class="audit-value">Identity refresh — customer has submitted order with locked KYC data</div>
+</div>
+
+<div class="audit-row">
+<div class="audit-label">Initiated By</div>
+<div class="audit-value"><em>(Agent / Admin ID)</em></div>
+</div>
+
+<div class="audit-row">
+<div class="audit-label">Initiated At</div>
+<div class="audit-value"><em>2026-08-31T__:__:__ UTC</em></div>
+</div>
+
+<div class="audit-row" style="background:#fff8e1;">
+<div class="audit-label">Previous kyc_session_id</div>
+<div class="audit-value"><em>(old session ID) → superseded</em></div>
+</div>
+
+<div class="audit-row" style="background:#fff8e1;">
+<div class="audit-label">Previous kyc_completed_at</div>
+<div class="audit-value"><em>(original timestamp)</em></div>
+</div>
+
+<div class="audit-row" style="background:#fff8e1;">
+<div class="audit-label">Previous photo_path</div>
+<div class="audit-value"><em>(original path → archived)</em></div>
+</div>
+
+<div class="audit-row" style="background:#e8f5e9;">
+<div class="audit-label">New kyc_session_id</div>
+<div class="audit-value"><em>(new session ID)</em></div>
+</div>
+
+<div class="audit-row" style="background:#e8f5e9;">
+<div class="audit-label">New kyc_completed_at</div>
+<div class="audit-value"><em>(new timestamp on completion)</em></div>
+</div>
+
+<div class="audit-row" style="background:#e8f5e9;">
+<div class="audit-label">New photo_path</div>
+<div class="audit-value"><em>(new photo path)</em></div>
+</div>
+
+<div class="audit-row">
+<div class="audit-label">Order Reference</div>
+<div class="audit-value"><em>(submitted order ID that triggered the lock)</em></div>
+</div>
+
+<div class="audit-row">
+<div class="audit-label">Verification Status</div>
+<div class="audit-value">🔄 PENDING_REVERIFICATION</div>
+</div>
+</div>
+
+</td>
+</tr>
+
+<tr><td><div class="section-divider"></div></td></tr>
+
+<!-- POLICY & RULES -->
+<tr>
+<td style="padding:25px 30px;">
+<div style="font-size:18px;font-weight:bold;border-left:5px solid #d4af37;padding-left:10px;margin-bottom:15px;">
+📜 மறு-சரிபார்ப்பு கொள்கை / Re-verification Policy
+</div>
+
+<ul class="policy-list">
+<li><strong>பூட்டப்பட்ட புலங்களை மாற்ற முடியாது</strong> — சமர்ப்பிக்கப்பட்ட ஆர்டர் உள்ள வாடிக்கையாளரின் KYC தரவை நேரடியாக திருத்த இயலாது. மாற்றீடு மட்டுமே புதிய KYC அமர்வு மூலம் சாத்தியம்.<br>
+<em>Locked fields cannot be edited — replacement is only possible through a new KYC session.</em></li>
+
+<li><strong>அணு மாற்றம்</strong> — மூன்று புலங்களும் (<code>kyc_completed_at</code>, <code>kyc_session_id</code>, <code>photo_path</code>) ஒரே நேரத்தில் மாற்றப்படும். பகுதி புதுப்பிப்புகள் அனுமதிக்கப்படாது.<br>
+<em>All three fields are swapped atomically — partial updates are not permitted.</em></li>
+
+<li><strong>பழைய தரவு அழிக்கப்படாது</strong> — முந்தைய KYC பதிவுகள் தணிக்கை காப்பகத்தில் பாதுகாக்கப்படும். புகைப்படங்கள் காப்பகக் சேமிப்பிற்கு நகர்த்தப்படும்.<br>
+<em>Previous KYC records are retained in the audit archive. Photos are moved to archival storage.</em></li>
+
+<li><strong>ஆர்டர் தொடர்ச்சி</strong> — மறு-சரிபார்ப்பு சமர்ப்பிக்கப்பட்ட ஆர்டரை பாதிக்காது. ஆர்டர் மூல KYC-யின் கீழ் செயலாக்கப்படும்; புதிய KYC எதிர்கால ஆர்டர்களுக்கு பொருந்தும்.<br>
+<em>Re-verification does not affect the submitted order. The order processes under the original KYC; the new KYC applies to future orders.</em></li>
+
+<li><strong>அங்கீகாரம் தேவை</strong> — மறு-சரிபார்ப்பு அங்கீகரிக்கப்பட்ட நிர்வாகி அல்லது அங்கீகரிக்கப்பட்ட முகவர் மட்டுமே தொடங்க முடியும்.<br>
+<em>Only an authorized admin or verified agent can initiate a re-verification.</em></li>
+</ul>
+
+</td>
+</tr>
+
+<tr><td><div class="section-divider"></div></td></tr>
+
+<!-- CTA -->
+<tr>
+<td style="padding:30px;text-align:center;">
+<div style="font-size:16px;color:#555;margin-bottom:15px;">
+அடையாளத்தைப் புதுப்பிக்க கீழே உள்ள பொத்தானை அழுத்தவும்
+</div>
+<div style="font-size:13px;color:#888;margin-bottom:20px;">
+To refresh this customer's identity, initiate a new KYC re-verification below.
+</div>
+<a href="#" class="btn-reverify" onclick="alert('KYC Re-verification session initiated.\n\nA new kyc_session_id will be assigned.\nThe previous KYC data will be archived.\nAll three locked fields will be replaced on completion.\n\nமறு-சரிபார்ப்பு அமர்வு தொடங்கப்பட்டது.'); return false;">
+🔄 புதிய KYC தொடங்கவும் — Start New KYC
+</a>
+<div style="font-size:11px;color:#aaa;margin-top:15px;">
+This action will create an audit record and does not modify the submitted order.
+</div>
+</td>
+</tr>
+
+<!-- FOOTER -->
+<tr>
+<td style="background:#1a1a2e;padding:25px;text-align:center;">
+<div style="color:#fff;font-size:18px;font-weight:bold;">
+இறைவி — KYC மறு-சரிபார்ப்பு
+</div>
+
+<div style="color:#aaa;font-size:12px;margin-top:10px;">
+வாடிக்கையாளர் அடையாள மேலாண்மை | Customer Identity Management
+</div>
+
+<div style="color:#666;font-size:10px;margin-top:15px;">
+© 2026 Iraivi — All re-verification actions are logged for compliance.
+</div>
+</td>
+</tr>
+
+</table>
+
+</td></tr>
+</table>
+
+</body>
+</html>
